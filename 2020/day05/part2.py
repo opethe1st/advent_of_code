@@ -5,7 +5,6 @@ def compute_seat_id(raw_data):
 
 
 def compute_row(row_data):
-    assert 
     row = 0
     for letter in row_data:
         row <<= 1
