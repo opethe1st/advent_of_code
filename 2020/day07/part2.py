@@ -20,11 +20,8 @@ def parse_graph():
                 graph[container].extend([bag]*int(match.group('bag_count')))
     return graph
 
-def parse_bag(line):
-    bag, rest_of_line = parse_words(line=line, n=2)
 
-
-def number_of_unique_ancestors(graph):
+def count_bags(graph):
     stack = ['shiny gold']
     count = 0
     while stack:
@@ -36,4 +33,4 @@ def number_of_unique_ancestors(graph):
 
 if __name__ == '__main__':
     graph = parse_graph()
-    print(number_of_unique_ancestors(graph=graph))
+    print(count_bags(graph=graph))
