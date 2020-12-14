@@ -4,29 +4,29 @@ import cmath
 
 
 def next_state(state, instruction):
-    current_direction, (current_x, current_y) = state
+    waypoint_position, ship_position = state
     direction, value = instruction
     if direction == 'N':
-        return ((current_direction.real + (current_direction.imag+value)*1j), (current_x, current_y))
+        return (waypoint_position + value*1j , ship_position)
     elif direction == 'S':
-        return ((current_direction.real + (current_direction.imag-value)*1j), (current_x, current_y))
+        return (waypoint_position - value*1j, ship_position)
     elif direction == 'W':
-        return ((current_direction.real - value + (current_direction.imag)*1j), (current_x, current_y))
+        return (waypoint_position - value, ship_position)
     elif direction == 'E':
-        return ((current_direction.real + value + (current_direction.imag)*1j), (current_x, current_y))
+        return (waypoint_position + value, ship_position)
     elif direction == 'L':
-        return (current_direction*cmath.rect(1, math.pi/180*value), (current_x, current_y))
+        return (waypoint_position*cmath.rect(1, math.pi/180*value), ship_position)
     elif direction == 'R':
-        return (current_direction*cmath.rect(1, -math.pi/180*value), (current_x, current_y))
+        return (waypoint_position*cmath.rect(1, -math.pi/180*value), ship_position)
     elif direction == 'F':
-        return (current_direction, (current_x+(value*current_direction.real), current_y+(value*current_direction.imag)))
+        return (waypoint_position, ship_position+value*waypoint_position)
 
 
 if __name__ == "__main__":
     instructions = [(line[0], int(line[1:])) for line in (line.strip() for line in open('input.txt'))]
-    state = ((10 + 1j), (0, 0))
+    state = ((10 + 1j), 0)
     for instruction in instructions:
         state = next_state(state, instruction)
         # print(state)
-    direction, (x, y) = state
-    print(abs(x) + abs(y))
+    waypoint_position, ship_position = state
+    print(abs(ship_position.real) + abs(ship_position.imag))
