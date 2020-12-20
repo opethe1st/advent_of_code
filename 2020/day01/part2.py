@@ -2,8 +2,6 @@
 This solution is a standard solution you can find on Leetcode for 3 sum.
 '''
 
-from collections import Counter
-
 nums = sorted([int(num) for num in open('input.txt')])
 
 for start in range(len(nums)):
