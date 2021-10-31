@@ -1,0 +1,3 @@
+5 -> lw
+lw OR lv -> lx
+lx -> a
